@@ -9,7 +9,7 @@ class LetterCounter:
         self.__letter_counter = Counter(dict.fromkeys(ascii_lowercase, 0))
         self.__letter_rankings = dict.fromkeys(ascii_lowercase, 0)
         
-        for word in words:
+        for word in set(words):
             self.__letter_counter.update(word)
 
         self.__update_rankings()
@@ -53,7 +53,7 @@ with (open("5_letter_words.txt") as f,
     # fall
     # gold
     counts = [LetterCounter() for _ in range(5)]
-    for i, letters in enumerate(zip(*words, strict=True)):
+    for i, letters in enumerate(zip(*set(words), strict=True)):
         print(letters[:10])
         print(letters.count("e"), letters.count("a"), letters.count("s"))
         counts[i].update(letters)
