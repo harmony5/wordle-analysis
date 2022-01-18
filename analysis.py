@@ -41,7 +41,7 @@ with (open("5_letter_words.txt") as f,
     open("letter_frequency.txt", "w") as f_out_3):
     
     text = f.read()
-    words = [w.strip() for w in text.split("\n")]
+    words = set(w.strip() for w in text.split("\n"))
     text = text.replace("\n", "")
     general_letter_counter = Counter(text)
     
@@ -53,7 +53,7 @@ with (open("5_letter_words.txt") as f,
     # fall
     # gold
     counts = [LetterCounter() for _ in range(5)]
-    for i, letters in enumerate(zip(*set(words), strict=True)):
+    for i, letters in enumerate(zip(*words, strict=True)):
         print(letters[:10])
         print(letters.count("e"), letters.count("a"), letters.count("s"))
         counts[i].update(letters)
